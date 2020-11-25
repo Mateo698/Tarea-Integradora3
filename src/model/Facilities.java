@@ -3,20 +3,25 @@ public class Facilities {
 	
 	private Player[][] dresserRoom1;
 	private Player[][] dresserRoom2;
-	private Coach[] 
+	private Coach[][] office;
 
+	private final int DRESSER_ROWS = 7;
+	private final int DRESSER_COL
+
+	public Facilities(){
+		
+	}
+	
 	public Player[][] getDresser1() {
-		throw new UnsupportedOperationException();
+		return dresserRoom1;
 	}
 
 	public Player[][] getDresser2() {
-		// TODO - implement Facilities.getDresser2
-		throw new UnsupportedOperationException();
+		return dresserRoom2
 	}
 
 	public Coach[][] getOffice() {
-		// TODO - implement Facilities.getOffice
-		throw new UnsupportedOperationException();
+		return office;
 	}
 
 }
