@@ -8,8 +8,12 @@ public class Coach extends Employee {
 		this.experienceYears = experienceYears;
 	}
 
-	public void getExpYears() {
+	public int getExpYears() {
 		return experienceYears;
+	}
+	
+	public void setExpYears(int experienceYears){
+		this.experienceYears = experienceYears;
 	}
 	
 	@Override

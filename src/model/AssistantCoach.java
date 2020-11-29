@@ -13,53 +13,84 @@ public class AssistantCoach extends Coach {
 			break;
 			
 			case 2:
-				Expertise.defensive;
+				this.assistantExpertise = Expertise.defensive;
 			break;
 			
 			case 3:
-				Expertise.possesion;
+				this.assistantExpertise = Expertise.possession;
 			break;
 			
 			case 4:
-				Expertise.labPlays;
+				this.assistantExpertise = Expertise.labPlays;
 			break;
+			
+			default:
+			
 		}
 	}
 
 	public boolean getWasPlayer() {
-		return wasPlayer
+		return wasPlayer;
+	}
+	
+	public void setWasPlayer(boolean wasPlayer){
+		this.wasPlayer = wasPlayer;
 	}
 
 	public Expertise getExpertise() {
 		return assistantExpertise;
 	}
 	
-	private String getStringExpertise(){
+	public void setExpertise(int assistantExpertise){
 		switch(assistantExpertise){
-			case ofensive:
-				return "Ofensivo";
+			case 1:
+				this.assistantExpertise = Expertise.ofensive;
 			break;
 			
-			case defensive:
-				return "Defensivo";
+			case 2:
+				this.assistantExpertise = Expertise.defensive;
 			break;
 			
-			case possesion:
-				return "Posesion";
+			case 3:
+				this.assistantExpertise = Expertise.possession;
 			break;
 			
-			case labPlays:
-				return "Jugadas de laboratorio";
+			case 4:
+				this.assistantExpertise = Expertise.labPlays;
 			break;
 			
 			default:
-			"U screwed something xd";
 		}
+	}
+	
+	private String getStringExpertise(){
+		String msg = "";
+		switch(assistantExpertise){
+			case ofensive:
+				msg = "Ofensivo";
+			break;
+			
+			case defensive:
+				msg = "Defensivo";
+			break;
+			
+			case possession:
+				msg = "Posesion";
+			break;
+			
+			case labPlays:
+				msg = "Jugadas de laboratorio";
+			break;
+			
+			default:
+			 msg = "U screwed something xd";
+		}
+		return msg;
 	}
 	
 	@Override
 	public String showInfo(){
-		String msg = super.showInfo();
+		String msg = "Asistente tecnico.\n"+super.showInfo();
 		msg += (getWasPlayer()?"Fue un jugador" : "No fue un jugador") + "\n" +
 		"Experticia: " + getStringExpertise() + "\n";
 		return msg;

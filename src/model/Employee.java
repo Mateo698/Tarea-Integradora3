@@ -13,20 +13,36 @@ public class Employee {
 		this.status = status;
 	}
 
-	public string getName() {
+	public String getName() {
 		return this.name;
+	}
+	
+	public void setName(String name){
+		this.name = name;
 	}
 
 	public int getID() {
 		return ID;
 	}
+	
+	public void setID(int id){
+		this.ID = id;
+	}
 
 	public int getSalary() {
 		return this.salary;
 	}
+	
+	public void setSalary(int salary){
+		this.salary = salary;
+	}
 
 	public boolean getStatus() {
 		return this.status;
+	}
+	
+	public void setStatus(boolean status){
+		this.status = status;
 	}
 	
 	public String showInfo(){
