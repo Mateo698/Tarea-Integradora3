@@ -115,53 +115,70 @@ public class Team {
 		}
 	}
 	
+	
 	public String updateLineup(String newLineup){
+		for(int i=0;i<LINEUP_ROWS;i++){
+			for(int j=0;j<LINEUP_COL;i++){
+				lineup[i][j] = 0;
+			}
+		}
 		String[] lineupArray = newLineup.split("-");
 		int numSpaces = LINEUP_ROWS-lineupArray.length;
 		int spaces = (int) lineupArray.length/numSpaces;
-		int[] location;
+		int[] location = new int[1];
 		switch(lineupArray.length){
 			case 1:
-				location = {5};
+				int[] location1 = {5};
+				location = location1;
 			break;
 			
 			case 2:
-				location = {4,6};
+				int[] location2 = {4,6};
+				location = location2;
 			break;
 			
 			case 3:
-				location = {8,5,2};
+				int[] location3 = {8,5,2};
+				location = location3;
 			break;
 			
 			case 4:
-				location = {8,6,4,2};
+				int[] location4 = {8,6,4,2};
+				location = location4;
 			break;
 			
 			case 5:
-				location = {9,7,5,3,1}
+				int[] location5 = {9,7,5,3,1};
+				location = location5;
 			break;
 			
 			case 6:
-				location = {8,7,5,4,2,1};
+				int[] location6 = {8,7,5,4,2,1};
+				location = location6;
 			break;
 			
 			case 7:
-				location = {8,7,6,4,3,2,1};
+				int[] location7 = {8,7,6,4,3,2,1};
+				location = location7;
 			break;
 			
 			case 8:
-				location = {8,7,6,5,4,3,2,1};
+				int[] location8 = {8,7,6,5,4,3,2,1};
+				location = location8;
 			break;
 			
 			case 9:
-				location = {9,8,7,6,5,4,3,2,1};
+				int[] location9 = {9,8,7,6,5,4,3,2,1};
+				location = location9;
 			break;
 			
 			case 10:
-				location = {9,8,7,6,5,4,3,2,1,0};
+				int[] location10 = {9,8,7,6,5,4,3,2,1,0};
+				location = location10;
 			break;
 			
 			default:
+				int[] locationA = {1};
 		}
 		int lineupQuantity = lineupArray.length;
 		int lineupNum = 0;
@@ -200,7 +217,7 @@ public class Team {
 			}
 			lineupNum++;
 		}
-		String msg = "";
+		String msg = "Nueva alineacion: \n";
 		for(int i=0; i<LINEUP_ROWS;i++){
 			msg += "\n";
 			for(int j=0; i<LINEUP_COL; i++){
@@ -209,6 +226,8 @@ public class Team {
 		}
 		return msg;
 	}
+	
+	
 	
 	
 	
@@ -260,26 +279,29 @@ public class Team {
 	}
 	
 	private String getLineUpString(){
-		int num1 = 0;
-		int num2 = 0;
-		int num3 = 0;
-		for(int i=0;i<LINEUP_COL;i++){
-			if(lineup[8][i] != 0){
-				num1++;
+		ArrayList<Integer> lineupString = new ArrayList<Integer>();
+		int num =0;
+		for(int i=0;i<LINEUP_ROWS;i++){
+			num = 0;
+			for(int j=0;j<LINEUP_COL;i++){
+				if(lineup[i][j] == 1){
+					num++;
+				}
+				if(j==6){
+					lineupString.add(num);
+				}
 			}
 		}
-		for(int i=0;i<LINEUP_COL;i++){
-			if(lineup[5][i] != 0){
-				num2++;
+		String stringLineup = "";
+		for(int i=0;i<lineupString.size();i++){
+			if(i== lineupString.size()-1){
+				stringLineup += lineupString.get(i);
+			}
+			else{
+				stringLineup += lineupString.get(i) + "-";
 			}
 		}
-		for(int i=0;i<LINEUP_COL;i++){
-			if(lineup[2][i] != 0){
-				num3++;
-			}
-		}
-		String lineup = num1 + "-" + num2 + "-" + num3;
-		return lineup;
+		return stringLineup;
 	}
 	
 	public String showLineUp(){
@@ -287,7 +309,7 @@ public class Team {
 		for(int i = 0;i<LINEUP_ROWS;i++){
 			msg += "\n";
 			for(int j=0;j<LINEUP_COL;i++){
-				if(lineup[i][j] != null){
+				if(lineup[i][j] == 1){
 					msg += 1;
 				}
 				else{

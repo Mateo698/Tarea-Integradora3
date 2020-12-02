@@ -60,6 +60,28 @@ public class Player extends Employee implements FutballStar {
 		return playerPosition;
 	}
 	
+	public void setPosition(int position){
+		switch(position){
+			case 1:
+				this.playerPosition = Position.keeper;
+			break;
+			
+			case 2:
+				this.playerPosition = Position.defense;
+			break;
+			
+			case 3:
+				this.playerPosition = Position.midfielder;
+			break;
+			
+			case 4:
+				this.playerPosition = Position.striker;
+			break;
+			
+			default:
+		}
+	}
+	
 	public void setPlayerPosition(int playerPosition){
 		switch(playerPosition){
 			case 1:

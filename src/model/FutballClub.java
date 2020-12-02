@@ -13,9 +13,9 @@ public class FutballClub {
 	
 	public FutballClub(String name, int NIT,String date){
 		this.name = name;
-		thos.NIT = NIT;
+		this.NIT = NIT;
 		String[] dates = date.split("/");
-		Date foundationDateR = new Date(Integer.parseInt(dates[0],Integer.parseInt(dates[1]),Integer.parseInt(dates[2]));
+		Date foundationDateR = new Date(Integer.parseInt(dates[0]),Integer.parseInt(dates[1]),Integer.parseInt(dates[2]));
 		clubTeams = new Team[MAX_TEAMS];
 		clubFacilities = new Facilities();
 	}
@@ -48,8 +48,8 @@ public class FutballClub {
 	*@param 
 	*@return 
 	*/
-	public void addEmployee(String name, int ID, int salary, int status, int experience, boolean wasPlayer, int expertise){
-		AssistantCoach newACoach = new AssistantCoach(name,ID,salary,status.experience,wasPlayer,expertise);
+	public void addEmployee(String name, int ID, int salary, boolean status, int experience, boolean wasPlayer, int expertise){
+		AssistantCoach newACoach = new AssistantCoach(name,ID,salary,status,experience,wasPlayer,expertise);
 		clubEmployees.add(newACoach);
 	}
 	
@@ -60,7 +60,7 @@ public class FutballClub {
 	*@param 
 	*@return 
 	*/
-	public void addEmployee(String name, int ID, int salary, int status, int shirtNumber, int goals, double grade, int position){
+	public void addEmployee(String name, int ID, int salary, boolean status, int shirtNumber, int goals, double grade, int position){
 		Player newPlayer = new Player(name,ID,salary,status,shirtNumber,goals,grade,position);
 		clubEmployees.add(newPlayer);
 	}
@@ -77,7 +77,7 @@ public class FutballClub {
 	}
 	
 	public String showAllInfo(){
-		msg = "Nombre del club: " + name + "\n" +
+		String msg = "Nombre del club: " + name + "\n" +
 		"NIT: " + NIT + "\n" +
 		"Fecha: " + foundationDate.stringDate() + "\n" +
 		"Empleados: " + showAllEmployees() + "\n" +
@@ -89,7 +89,7 @@ public class FutballClub {
 		int enumeration = 1;
 		String msg = "";
 		for(int i=0;i<clubEmployees.size();i++){
-			msg += enumeration + ". \n" clubEmployees.get(i).showInfo() + "\n";
+			msg += enumeration + ". \n" + clubEmployees.get(i).showInfo() + "\n";
 			enumeration++;
 		}
 		return msg;
@@ -119,7 +119,9 @@ public class FutballClub {
 		switch(selectedType){
 			case 1:
 				if(clubEmployees.get(employeeSelected) instanceof MainCoach){
-					msg = clubTeams[teamSelected].addCoach(employees);
+					Employee e = clubEmployees.get(employeeSelected);
+					MainCoach m = (MainCoach) e;
+					msg = clubTeams[teamSelected].addCoach(m);
 				}
 				else{
 					msg = "Seleccione un empleado apropiado";
@@ -128,7 +130,9 @@ public class FutballClub {
 			
 			case 2:
 				if(clubEmployees.get(employeeSelected) instanceof AssistantCoach){
-					msg = clubTeams[teamSelected].addAssistant(employees);
+					Employee e = clubEmployees.get(employeeSelected);
+					AssistantCoach a = (AssistantCoach) e;
+					msg = clubTeams[teamSelected].addAssistant(a);
 				}
 				else{
 					msg = "Seleccione un empleado apropiado";
@@ -137,7 +141,9 @@ public class FutballClub {
 			
 			case 3:
 				if(clubEmployees.get(employeeSelected) instanceof Player){
-					msg = clubTeams[teamSelected].addPlayer(employees);
+					Employee e = clubEmployees.get(employeeSelected);
+					Player p = (Player) e;
+					msg = clubTeams[teamSelected].addPlayer(p);
 				}
 				else{
 					msg = "Seleccione un empleado apropiado";
@@ -152,7 +158,7 @@ public class FutballClub {
 	
 	public String showTeams(){
 		int enumeration = 1;
-		String msg = ""
+		String msg = "";
 		for(int i=0;i<MAX_TEAMS;i++){
 			if(clubTeams[i] != null){
 				msg += enumeration + ". \n" + clubTeams[i].showInfo() + "\n";
@@ -169,43 +175,53 @@ public class FutballClub {
 	}
 	
 	
+	
 	//Update main coach info
 	public String updateEmployeeInfo(int selected,String name, int ID, int salary, boolean status, int experience, int managedTeams, int champions){
 		selected--;
-		clubEmployees.get(selected).setName(name);
-		clubEmployees.get(selected).setID(ID);
-		clubEmployees.get(selected).setSalary(salary);
-		clubEmployees.get(selected).setStatus(status);
-		clubEmployees.get(selected).setExpYears(experience);
-		clubEmployees.get(selected).setManagedTeams(managedTeams);
-		clubEmployees.get(selected).setChampions(champions);
+		Employee e = clubEmployees.get(selected);
+		MainCoach c = (MainCoach) e;
+		c.setName(name);
+		c.setID(ID);
+		c.setSalary(salary);
+		c.setStatus(status);
+		c.setExpYears(experience);
+		c.setManagedTeams(managedTeams);
+		c.setChampions(champions);
+		clubEmployees.set(selected,c);
 		return "Informacion del entrenador actualizada";
 	}
 	
 	//Updates assistant info
-	public String updateEmployeeInfo(int selected,String name, int ID, int salary, int status, int experience, boolean wasPlayer, int expertise){
+	public String updateEmployeeInfo(int selected,String name, int ID, int salary, boolean status, int experience, boolean wasPlayer, int expertise){
 		selected--;
-		clubEmployees.get(selected).setName(name);
-		clubEmployees.get(selected).setID(ID);
-		clubEmployees.get(selected).setSalary(salary);
-		clubEmployees.get(selected).setStatus(status);
-		clubEmployees.get(selected).setExpYears(experience);
-		clubEmployees.get(selected).setWasPlayer(wasPlayer);
-		clubEmployees.get(selected).setExpertise(expertise);
+		Employee e = clubEmployees.get(selected);
+		AssistantCoach a = (AssistantCoach) e;
+		a.setName(name);
+		a.setID(ID);
+		a.setSalary(salary);
+		a.setStatus(status);
+		a.setExpYears(experience);
+		a.setWasPlayer(wasPlayer);
+		a.setExpertise(expertise);
+		clubEmployees.set(selected,a);
 		return "Informacion del asistente actualizada";
 	}
 	
 	//Updates player info
-	public String updateEmployeeInfo(int selected,String name, int ID, int salary, int status, int shirtNumber, int goals, double grade, int position){
+	public String updateEmployeeInfo(int selected,String name, int ID, int salary, boolean status, int shirtNumber, int goals, double grade, int position){
 		selected--;
-		clubEmployees.get(selected).setName(name);
-		clubEmployees.get(selected).setID(ID);
-		clubEmployees.get(selected).setSalary(salary);
-		clubEmployees.get(selected).setStatus(status);
-		clubEmployees.get(selected).setShirtNumber(shirtNumber);
-		clubEmployees.get(selected).setGoals(goals);
-		clubEmployees.get(selected).setAverageGrade(grade);
-		clubEmployees.get(selected).setPosition(position);
+		Employee e = clubEmployees.get(selected);
+		Player p = (Player) e;
+		p.setName(name);
+		p.setID(ID);
+		p.setSalary(salary);
+		p.setStatus(status);
+		p.setShirtNumber(shirtNumber);
+		p.setGoals(goals);
+		p.setAverageGrade(grade);
+		p.setPosition(position);
+		clubEmployees.set(selected,p);
 		return "Informacion del jugador actualizada";
 	}
 	
@@ -218,7 +234,9 @@ public class FutballClub {
 					msg = "Seleccione un empleado valido";
 				}
 				else{
-					msg = clubFacilities.findCoach(clubEmployees.get(selectedEmployee));
+					Employee e = clubEmployees.get(selectedEmployee);
+					MainCoach m = (MainCoach) e;
+					msg = clubFacilities.findCoach(m);
 				}
 			break;
 			
@@ -227,16 +245,20 @@ public class FutballClub {
 					msg = "Seleccione un empleado valido";
 				}
 				else{
-					msg = clubFacilities.findAsistant(clubEmployees.get(selectedEmployee));
+					Employee e = clubEmployees.get(selectedEmployee);
+					AssistantCoach a = (AssistantCoach) e;
+					msg = clubFacilities.findAsistant(a);
 				}
 			break;
 			
 			case 3:
 				if(clubEmployees.get(selectedEmployee) instanceof MainCoach || clubEmployees.get(selectedEmployee) instanceof AssistantCoach){
-					msg = clubFacilities.findCoach(clubEmployees.get(selectedEmployee));
+					msg = "Seleccione un empleado valido";
 				}
 				else{
-					msg = clubFacilities.findPlayer(clubEmployees.get(selectedEmployee),selectedDresser);
+					Employee e = clubEmployees.get(selectedEmployee);
+					Player p = (Player) e;
+					msg = clubFacilities.findPlayer(p,selectedDresser);
 				}
 			break;
 			
@@ -245,6 +267,24 @@ public class FutballClub {
 		}
 		return msg;
 		
+	}
+	
+	public String placeEmployee(int selectedEmployee,int selectedDresser){
+		selectedEmployee--;
+		String msg = "";
+		if(clubEmployees.get(selectedEmployee) instanceof MainCoach){
+			MainCoach c = (MainCoach) clubEmployees.get(selectedEmployee);
+			msg = clubFacilities.setCoach(c);
+		}
+		else if(clubEmployees.get(selectedEmployee) instanceof AssistantCoach){
+			AssistantCoach a = (AssistantCoach) clubEmployees.get(selectedEmployee);
+			msg = clubFacilities.setAssistant(a);
+		}
+		else{
+			Player p = (Player) clubEmployees.get(selectedEmployee);
+			msg = clubFacilities.setPlayer(selectedDresser,p,clubTeams);
+		}
+		return msg;
 	}
 
 	/**
