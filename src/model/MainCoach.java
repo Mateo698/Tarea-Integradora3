@@ -34,6 +34,12 @@ public class MainCoach extends Coach implements FutballStar {
 		return msg;
 	}
 	
+	/**
+	*Calcultaes the price of the main coach<br>
+	*<b>pre: </b> The main coach must already be created <br>
+	*<b>post: </b> Gives the price of the coach <br>
+	*@return the price of the coach
+	*/
 	@Override
 	public int calculatePrice(){
 		int price = 0;
@@ -41,6 +47,12 @@ public class MainCoach extends Coach implements FutballStar {
 		return price;
 	}
 	
+	/**
+	*Calculates the level of the main coach<br>
+	*<b>pre: </b> The coach must already be created <br>
+	*<b>post: </b> Gives the level of the coach <br> 
+	*@return The level of the coach
+	*/
 	@Override
 	public double calculateLevel(){
 		double level = 0;

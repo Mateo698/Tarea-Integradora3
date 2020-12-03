@@ -11,6 +11,12 @@ public class Date {
 		this.year = year;
 	}
 	
+	/**
+	*Gives the date<br>
+	*<b>pre: </b> The date must already be created <br>
+	*<b>post: </b> Shows the date <br>
+	*@return the date
+	*/
 	public String stringDate(){
 		String msg = day + "/" + month + "/" + year;
 		return msg;

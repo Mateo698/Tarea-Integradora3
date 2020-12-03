@@ -104,6 +104,12 @@ public class Player extends Employee implements FutballStar {
 		}
 	}
 	
+	/**
+	*Gives the position of the player as a String<br>
+	*<b>pre: </b> The player must already have a position of type Enum Position <br>
+	*<b>post: </b> Shows the position as a string <br>
+	*@return the position of the player
+	*/
 	private String getStringPosition(){
 		String msg = "";
 		switch(playerPosition){
@@ -139,6 +145,12 @@ public class Player extends Employee implements FutballStar {
 		return msg;
 	}
 	
+	/**
+	*Calculates the price of the player<br>
+	*<b>pre: </b> The player must already be created <br>
+	*<b>post: </b> Gives the price of the player <br>
+	*@return the price of the player
+	*/
 	@Override
 	public int calculatePrice(){
 		int price = 0;
@@ -166,6 +178,12 @@ public class Player extends Employee implements FutballStar {
 		return price;
 	}
 	
+	/**
+	*Calculates the level of the player<br>
+	*<b>pre: </b> The player must already be created <br>
+	*<b>post: </b> Gives the player's level <br>
+	*@return the player's level
+	*/
 	@Override
 	public double calculateLevel(){
 		double level = 0;

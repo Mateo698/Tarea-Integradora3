@@ -45,6 +45,12 @@ public class Employee {
 		this.status = status;
 	}
 	
+	/**
+	*Show all the employee's info<br>
+	*<b>pre: </b> A sub class of employee must already be created <br>
+	*<b>post: </b> Gives its information <br> 
+	*@return the information of the employee
+	*/
 	public String showInfo(){
 		String msg = "";
 		msg = "Nombre : " + getName() + "\n" +
